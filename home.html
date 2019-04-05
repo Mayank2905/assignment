@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mayank</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
+  <link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+
+      <link rel="stylesheet" href="css/home.css">
+	  <style>
+	  .topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.topnav-right {
+  float: right;
+}
+	  </style>
+	  <script src='js/tokenvalidate.js'></script>
+<script>
+var token=sessionStorage.getItem("token");
+if(token) {
+valid(token);
+
+var data = null;
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+   // console.log(this.responseText);
+	var myObj = JSON.parse(this.responseText);
+	
+	
+	var stat=myObj.status;
+	if(stat==true)
+	{
+	var js=myObj.data;
+
+	var d=js.content;
+localStorage.setItem("total",js.totalPages);
+
+localStorage.setItem("current",js.currentPage);
+localStorage.setItem("size",js.currentPageSize);
+
+
+  var x = document.createElement("TR");
+  x.setAttribute("id", "myTr");
+  document.getElementById("content").appendChild(x);
+
+  var q = document.createElement("TD");
+  var u = document.createTextNode("UserName");
+  q.appendChild(u);
+    var r = document.createElement("TD");
+  var p = document.createTextNode("Password");
+  r.appendChild(p);
+    var s = document.createElement("TD");
+  var g = document.createTextNode("Gender");
+  s.appendChild(g);
+  var t = document.createElement("TD");
+  var id = document.createTextNode("ID");
+  t.appendChild(id);
+   document.getElementById("myTr").appendChild(t);
+  document.getElementById("myTr").appendChild(q);
+    document.getElementById("myTr").appendChild(r);
+	  document.getElementById("myTr").appendChild(s);
+for ( var i in d) {
+
+
+var x = document.createElement("TR");
+  x.setAttribute("id", "tr"+i);
+  document.getElementById("content").appendChild(x);
+
+  var q = document.createElement("TD");
+  var u = document.createTextNode(d[i].userName);
+  q.appendChild(u);
+    var r = document.createElement("TD");
+  var p = document.createTextNode(d[i].password);
+  r.appendChild(p);
+    var s = document.createElement("TD");
+  var g = document.createTextNode(d[i].gender);
+  s.appendChild(g);
+   var t = document.createElement("TD");
+  var id = document.createTextNode(d[i].id);
+  t.appendChild(id);
+   document.getElementById("tr"+i).appendChild(t);
+  document.getElementById("tr"+i).appendChild(q);
+    document.getElementById("tr"+i).appendChild(r);
+	  document.getElementById("tr"+i).appendChild(s);
+		var id = d[i].userName;
+		var name = d[i].gender;
+		console.log(id);
+		console.log(name);
+	}
+
+	}else
+	{
+	
+	}  
+	
+	
+	
+  }
+});
+
+xhr.open("GET", "https://api.prontoitlabs.com/api/v1/user?page=0&size=25");
+xhr.setRequestHeader("X-AUTH-TOKEN",token);
+xhr.setRequestHeader("cache-control", "no-cache");
+
+
+xhr.send(data);
+
+}else
+{
+ window.location="index";
+}
+function logout()
+{
+sessionStorage.removeItem('token');
+
+// Remove all saved data from sessionStorage
+sessionStorage.clear();
+ window.location="index";
+}
+
+</script>
+  
+</head>
+
+<body>
+
+<div class="topnav">
+  <a class="active" href="#">Home</a>
+  
+  <div class="topnav-right">
+   
+    <a href="#" onclick="logout();">logout</a>
+  </div>
+</div>
+  <div class="wrapper">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>User Details</h1>
+        <p id="pagination-here"></p>
+        <!--<p id="content">Details</p>  -->
+		<table class="w3-table-all w3-card-4" id="content">
+ 
+  </table>
+  
+      </div>
+    </div>
+  </div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+<script src='https://cdn.rawgit.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js'></script>
+<script src="js/user.js"></script> 
+<script>
+getuser(localStorage.getItem("total"),localStorage.getItem("current"),localStorage.getItem("size"));
+</script>
+ 
+  
+
+   
+
+
+
+</body>
+
+</html>
