@@ -16,7 +16,7 @@ xhr.addEventListener("readystatechange", function () {
 	if(s==true)
 	{
 	
-	console.log("authenticated");
+
 	}else
 	{
 	window.location="index";

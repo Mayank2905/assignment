@@ -20,14 +20,13 @@ xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
     console.log(this.responseText);
 	var myObj = JSON.parse(this.responseText);
-	
-	
+
 	var s=myObj.status;
 	if(s==true)
 	{
 	var t=myObj.data;
 	console.log(t);
-	//var obj = JSON.parse(t);
+
 	var d=t.user;
 	//	var obj1 = JSON.parse(d);
 sessionStorage.setItem("username", d.userName);

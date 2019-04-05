@@ -24,9 +24,9 @@ xhr.addEventListener("readystatechange", function () {
 	{
 	var t=myObj.data;
 	console.log(t);
-	//var obj = JSON.parse(t);
+	
 	var d=t.user;
-	//	var obj1 = JSON.parse(d);
+	
 sessionStorage.setItem("username", d.userName);
 sessionStorage.setItem("password", d.password);
 sessionStorage.setItem("gender", d.gender);

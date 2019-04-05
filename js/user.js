@@ -11,7 +11,7 @@ $('#pagination-here').bootpag({
 
 //page click action
 $('#pagination-here').on("page", function(event, num){
-    //show / hide content or pull via ajax etc
+
 	//ajax start here 
 	
 	var token=sessionStorage.getItem("token");
